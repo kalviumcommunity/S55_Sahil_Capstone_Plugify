@@ -26,3 +26,10 @@ Plugify' is an innovative website designed to bridge the gap between EV owners a
 ## Conclusion
 
 Plugify' stands at the forefront of revolutionizing the EV charging ecosystem in India. By enhancing convenience and accessibility, it not only supports the current infrastructure but also paves the way for the rapid adoption of electric vehicles across the nation.
+
+## Day to Day plan
+
+Day 1: Setting up a Git Repo
+Day 2: Low fid design on figma
+Day 3: Initialize a react/frontend application
+
