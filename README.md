@@ -33,3 +33,7 @@ Plugify' stands at the forefront of revolutionizing the EV charging ecosystem in
 - Day 2: Low fid design on figma
 - Day 3: Initialize a react/frontend application
 
+## Frontend Deployed Link
+
+https://plugify-connect.vercel.app/
+
