@@ -37,3 +37,6 @@ Day 3: Initialize a react/frontend application
 
 https://plugify-connect.vercel.app/
 
+## Backend Deployed Link
+
+https://plugify.onrender.com/
