@@ -37,3 +37,6 @@ Plugify' stands at the forefront of revolutionizing the EV charging ecosystem in
 
 https://plugify-connect.vercel.app/
 
+## Backend Deployed Link
+
+https://plugify.onrender.com/
