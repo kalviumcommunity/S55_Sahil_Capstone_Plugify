@@ -12,6 +12,7 @@ const startDatabase = async () => {
     } catch (err) {
         console.error("Failed to connect to database");
         connectionStatus = "error";
+        throw err;
     }
 };  
 
@@ -21,7 +22,8 @@ const stopDatabase = async () => {
 };
 
 const getConnectionStatus = async () => {
-    return JSON.stringify(connectionStatus);
+    return { status: connectionStatus };
+    // return JSON.stringify(connectionStatus);
 };
 
 module.exports = { startDatabase, stopDatabase, getConnectionStatus };
