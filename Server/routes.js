@@ -10,6 +10,16 @@ app.get('/', async (req, res) => {
     res.send(connectionStatus);
 });
 
+app.get('/data', async (req, res) => {
+    try {
+        const users = await userModel.find();
+        res.json(users);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 app.get('/hello', function(req, res){
   res.send('Hello')
 })
