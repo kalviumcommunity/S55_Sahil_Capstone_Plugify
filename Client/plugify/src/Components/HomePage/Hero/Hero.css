@@ -1,14 +1,14 @@
 .hero {
     margin: 2vw 5vw;
-    margin-top: 30px;
+    margin-top: 150px;
     height: 100%;
 }
 
 .hero-text {
     color: white;
-    font-size: 3.4rem;
+    font-size: 4.4rem;
     font-weight: 700;
-    line-height: 5vw;
+    line-height: 110px;
 }
 
 .hero-explore {
@@ -16,8 +16,8 @@
     align-items: center;
     gap: 50px;
     width: fit-content;
-    margin-top: 70px;
-    padding: 5px 8px;
+    margin-top: 7vw;
+    padding: 2px 2px;
     padding-left: 30px;
     border-radius: 60px;
     background: white;
@@ -30,8 +30,13 @@
     font-weight: 500;
 }
 
+.hero-explore img{
+    height: 80px;
+    width: 80px;
+}
+
 .hero-dot-play {
-    margin-top: 120px;
+    margin-top: 110px;
     display: flex;
     justify-content: space-between;
 }
@@ -67,4 +72,43 @@
     font-weight: 500;
 }
 
-
+@media (max-width: 768px) {
+    .hero-text {
+        font-size: 3rem;
+        line-height: 65px;
+    }
+    .hero-dot-play {
+        margin-top: 220px;
+    }
+    .hero-explore {
+        margin-top: 120px;
+        padding: 5px 2px;
+        padding-left: 8px;
+        gap: 15px;
+        height: 60px;
+    }
+    .hero-explore img{
+        height: 50px;
+        width: 50px;
+    }
+    .hero-explore p {
+        font-size: 0.9em;
+        font-weight: 400;
+    }
+    .hero-dot {
+        width: 10px;
+        height: 10px;
+    }
+    .hero-dots {
+        gap: 13px;
+    }
+    .play-btn{
+        width: 60px;
+        height: 60px;
+    }
+    .hero-play p {
+        color: white;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+  }
