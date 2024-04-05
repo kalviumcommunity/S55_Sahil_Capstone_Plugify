@@ -32,7 +32,7 @@ const Navbar = () => {
               <div>About</div>
             </li>
             <NavLink to="/contact" className='nav-contact'>
-              <div >Contact</div>
+              Contact
             </NavLink>
           </ul>
         </div>
