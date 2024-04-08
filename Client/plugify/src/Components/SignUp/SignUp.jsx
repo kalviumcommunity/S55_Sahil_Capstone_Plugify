@@ -18,7 +18,12 @@ const SignInSignUpForm = () => {
     container.classList.remove('sign-up-mode');
   };
 
-  const onSubmit = (data) => {
+  //Created two distinct functions for login and signup forms.
+  const onSubmitSignUp = (data) => {
+    console.log(data);
+  };
+
+  const onSubmitSignIn = (data) => {
     console.log(data);
   };
 
@@ -26,7 +31,7 @@ const SignInSignUpForm = () => {
     <div className="signup-container">
       <div className="forms-container">
         <div className="signin-signup">
-          <form onSubmit={handleSubmit(onSubmit)} className="sign-in-form">
+          <form onSubmit={handleSubmit(onSubmitSignIn)} className="sign-in-form">
             <h2 className="title-signup">Login</h2>
             <div className="input-field">
               <FontAwesomeIcon icon={faUser} className="fas fa-user" />
@@ -39,24 +44,24 @@ const SignInSignUpForm = () => {
             <input type="submit" value="Login" className="signup-btn solid" />
             <p className="social-text">Or Login with social platforms</p>
             <div className="social-icons flex-centre">
-                <a href="https://www.instagram.com/sahil_k17/" className="facebook">
+                <a href="https://www.instagram.com/sahil_k17/" className="facebook bg-color">
                   <FontAwesomeIcon icon={faFacebookF} className="icon" />
                 </a>
-                <a href="https://www.instagram.com/sahil_k17/" className="twitter">
+                <a href="https://www.instagram.com/sahil_k17/" className="twitter bg-color">
                   <FontAwesomeIcon icon={faXTwitter} className="icon " />
                 </a>
-                <a href="https://www.instagram.com/sahil_k17/" className="google">
+                <a href="https://www.instagram.com/sahil_k17/" className="google bg-color">
                   <FontAwesomeIcon icon={faGoogle} className="icon" />
                 </a>
                 <a
                   href="https://www.linkedin.com/in/sahil-kharatmol-229912273/"
-                  className="linkedin"
+                  className="linkedin bg-color"
                 >
                   <FontAwesomeIcon icon={faLinkedinIn} className="icon" />
                 </a>
               </div>
           </form>
-          <form onSubmit={handleSubmit(onSubmit)} className="sign-up-form">
+          <form onSubmit={handleSubmit(onSubmitSignUp)} className="sign-up-form">
             <h2 className="title-signup">Sign up</h2>
             <div className="input-field">
               <FontAwesomeIcon icon={faUser} className="fas fa-user" />
@@ -73,18 +78,18 @@ const SignInSignUpForm = () => {
             <input type="submit" value="Sign up" className="signup-btn" />
             <p className="social-text">Or Sign up with social platforms</p>
             <div className="social-icons flex-centre">
-                <a href="https://www.instagram.com/sahil_k17/" className="facebook">
+                <a href="https://www.instagram.com/sahil_k17/" className="facebook bg-color">
                   <FontAwesomeIcon icon={faFacebookF} className="icon" />
                 </a>
-                <a href="https://www.instagram.com/sahil_k17/" className="twitter">
+                <a href="https://www.instagram.com/sahil_k17/" className="twitter bg-color">
                   <FontAwesomeIcon icon={faXTwitter} className="icon " />
                 </a>
-                <a href="https://www.instagram.com/sahil_k17/" className="google">
+                <a href="https://www.instagram.com/sahil_k17/" className="google bg-color">
                   <FontAwesomeIcon icon={faGoogle} className="icon" />
                 </a>
                 <a
                   href="https://www.linkedin.com/in/sahil-kharatmol-229912273/"
-                  className="icon linkedin"
+                  className="linkedin bg-color"
                 >
                   <FontAwesomeIcon icon={faLinkedinIn} className="icon" />
                 </a>

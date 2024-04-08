@@ -57,18 +57,18 @@ function Contact() {
 
             <div className="social-medias">
               <div className="social-icons">
-                <a href="https://www.instagram.com/sahil_k17/" className="facebook">
+                <a href="https://www.instagram.com/sahil_k17/" className="facebook bg-color">
                   <FontAwesomeIcon icon={faFacebookF} className="icon" />
                 </a>
-                <a href="https://www.instagram.com/sahil_k17/" className="twitter">
+                <a href="https://www.instagram.com/sahil_k17/" className="twitter bg-color">
                   <FontAwesomeIcon icon={faXTwitter} className="icon " />
                 </a>
-                <a href="https://www.instagram.com/sahil_k17/" className="icon instagram">
+                <a href="https://www.instagram.com/sahil_k17/" className="instagram bg-color">
                   <FontAwesomeIcon icon={faInstagram} className="icon" />
                 </a>
                 <a
                   href="https://www.linkedin.com/in/sahil-kharatmol-229912273/"
-                  className="icon linkedin"
+                  className="linkedin bg-color"
                 >
                   <FontAwesomeIcon icon={faLinkedinIn} className="icon" />
                 </a>

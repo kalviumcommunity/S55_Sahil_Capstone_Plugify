@@ -11,8 +11,6 @@
 
 .navbar {
   height: 60px;
-  /* position: fixed;
-  width: 100%; */
   margin-top: 10px;
 }
 
@@ -162,5 +160,4 @@ li div:hover {
     font-weight: 700;
 
   }
-
 }

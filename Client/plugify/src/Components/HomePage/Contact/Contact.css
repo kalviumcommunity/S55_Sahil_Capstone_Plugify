@@ -192,16 +192,19 @@ textarea.input {
   align-items: center;
   width: 40px;
   height: 40px;
-  background-color: #fff;
   text-align: center;
   line-height: 80px;
   font-size: 35px;
   margin-inline: 5px;
-  border-radius: 50%;
   position: relative;
   overflow: hidden;
-  border: 3px solid #f4f4f4;
   z-index: 1;
+}
+
+.bg-color{
+  background-color: #fff;
+  border: 3px solid #f4f4f4;
+  border-radius: 50%;
 }
 
 .social-icons a .icon {
