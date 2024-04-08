@@ -21,9 +21,9 @@ textarea {
   position: fixed;
   z-index: -1;
   object-fit: cover;
-  background-position: end;
+  background-position: center;
   background-repeat: repeat;
-  background-size: cover;
+  background-size: auto;
 }
 
 .color {
@@ -62,8 +62,8 @@ textarea {
   left: -13px;
 }
 
-form {
-  padding: 2.3em 2.2em;
+.contacts-form {
+  padding: 2.2em 1.6em;
   z-index: 10;
   overflow: hidden;
   position: relative;
@@ -177,12 +177,8 @@ textarea.input {
   margin-right: 0.7em;
 }
 
-.social-media {
+.social-medias {
   padding-top: 2em;
-}
-
-.social-media p {
-  color: #333;
 }
 
 .social-icons {
@@ -191,35 +187,73 @@ textarea.input {
 }
 
 .social-icons a {
-  width: 35px;
-  height: 35px;
-  border-radius: 5px;
-  background: linear-gradient(45deg, #535353, #000000);
-  /* background-color: #262e26; */
-  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
   text-align: center;
-  line-height: 35px;
-  margin-right: 0.5em;
-  transition: 0.3s;
+  line-height: 80px;
+  font-size: 35px;
+  margin-inline: 5px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 3px solid #f4f4f4;
+  z-index: 1;
 }
 
-.social-icons a:hover {
-  transform: scale(1.05);
+.social-icons a .icon {
+  position: relative;
+  color: #262626;
+  transition: .5s;
+  z-index: 3;
+  height: auto;
+  width: 15px;
+  margin-right: 0;
+  padding-top: 0;
 }
 
-.facebook:hover {
-  background: #1877f2;
+.social-icons a:hover .icon {
+  color: #fff;
+  transform: rotateY(360deg);
 }
 
-.instagram:hover {
-  background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+.social-icons a:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(0, 0, 0);
+  transition: .5s;
+  z-index: 2;
 }
-.twitter:hover {
+
+.social-icons a:hover:before {
+  top: 0;
+}
+
+.facebook:hover:before {
+  background: #3b5999;
+}
+
+.instagram:hover:before {
+  background: linear-gradient(210deg, #833ab4, #fd1d1d, #fcb045);
+}
+
+.twitter:hover:before {
   background: linear-gradient(-135deg, #525252, #000000);
 }
 
-.linkedin:hover {
-  background: linear-gradient(135deg, #0077b5, #0a66c2);
+.linkedin:hover:before {
+  background: #0077b5;
+}
+
+.google:hover:before {
+  background: linear-gradient(180deg, #4285f4, #34a853, #fbbc05, #ea4335);
 }
 
 .contact-info:before {
@@ -277,6 +311,10 @@ textarea.input {
 
   .social-media {
     padding: 1.5em 0 0 0;
+  }
+
+  .social-icons a .icon {
+    padding: 5.8px;
   }
 }
 
