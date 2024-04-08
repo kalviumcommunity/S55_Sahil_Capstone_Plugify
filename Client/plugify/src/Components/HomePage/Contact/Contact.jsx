@@ -55,27 +55,29 @@ function Contact() {
               </div>
             </div>
 
-            <div className="social-media">
-              <p>Connect with us :</p>
+            <div className="social-medias">
               <div className="social-icons">
-                <a href="https://www.instagram.com/sahil_k17/" className="facebook">
-                  <FontAwesomeIcon icon={faFacebookF} />
+                <a href="https://www.instagram.com/sahil_k17/" className="facebook bg-color">
+                  <FontAwesomeIcon icon={faFacebookF} className="icon" />
                 </a>
-                <a href="https://www.instagram.com/sahil_k17/" className="twitter">
-                  <FontAwesomeIcon icon={faXTwitter} />
+                <a href="https://www.instagram.com/sahil_k17/" className="twitter bg-color">
+                  <FontAwesomeIcon icon={faXTwitter} className="icon " />
                 </a>
-                <a href="https://www.instagram.com/sahil_k17/" className="instagram">
-                  <FontAwesomeIcon icon={faInstagram} />
+                <a href="https://www.instagram.com/sahil_k17/" className="instagram bg-color">
+                  <FontAwesomeIcon icon={faInstagram} className="icon" />
                 </a>
-                <a href="https://www.linkedin.com/in/sahil-kharatmol-229912273/" className="linkedin">
-                  <FontAwesomeIcon icon={faLinkedinIn} />
+                <a
+                  href="https://www.linkedin.com/in/sahil-kharatmol-229912273/"
+                  className="linkedin bg-color"
+                >
+                  <FontAwesomeIcon icon={faLinkedinIn} className="icon" />
                 </a>
               </div>
             </div>
           </div>
 
           <div className="contact-form">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} className="contacts-form">
               <h3 className="title">Contact us</h3>
               <div className="input-container">
                 <label htmlFor="name" className={errors.name ? "active" : ""}>

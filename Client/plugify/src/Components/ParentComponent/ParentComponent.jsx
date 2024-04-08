@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Background from '../HomePage/Background/Background';
 import Navbar from '../HomePage/Navbar/Navbar';
 import Hero from '../HomePage/Hero/Hero';
+import SignInSignUpForm from '../SignUp/SignUp';
 
 function ParentComponent() {
   let heroData = [
@@ -9,8 +10,8 @@ function ParentComponent() {
     {text1: "Indulge", text2:"your passions"},
     {text1: "Give in to", text2:"your passions"}
   ]
-  const [heroCount, setHeroCount] = useState(2);
-  const [playStatus, setPlayStatus] = useState(false);
+  const [heroCount, setHeroCount] = useState(0);
+  const [playStatus, setPlayStatus] = useState(true);
 
   useEffect(()=> {
     const intervalId = setInterval(() => {
@@ -31,6 +32,7 @@ function ParentComponent() {
         setHeroCount={setHeroCount}
         playStatus={playStatus}
       />
+      <SignInSignUpForm/>
     </>
   )
 }
