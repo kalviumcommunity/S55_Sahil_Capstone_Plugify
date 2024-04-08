@@ -1,30 +1,120 @@
-.nav{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: -60px;
-    margin-inline-end: 20px;
-    color: white;
-    background-position: top;
-    background-repeat: repeat;
-    background-size: cover;
+.container {
+  margin: 20px auto;
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  height: 100%;
+  color: aliceblue;
 }
 
-.nav-logo img{
-    height: 200px;
-    width: 200px;
+.navbar {
+  height: 60px;
+  position: relative;
 }
-.nav-menu{
-    display: flex;
-    align-items: center;
-    list-style: none;
-    font-size: 1rem;
-    gap: 90px;
+
+.logo img {
+    margin-top: 50px ;
+    height: 180px;
+    width: 180px;
+}
+
+.hamburger {
+  display: none;
 }
 
 .nav-contact{
-    border-radius: 50px;
-    padding: 10px 38px;
-    background: white;
-    color: #262626;
+  padding: 10px 38px;
+  background: white;
+  border-radius: 50px;
+  color: #262626;
+}
+
+.nav-elements ul {
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+}
+
+.nav-elements ul li{
+    padding-block: 10px;
+}
+
+.nav-elements ul li:not(:last-child) {
+  margin-right: 80px;
+}
+
+.nav-elements ul a {
+  font-size: 16px;
+  font-weight: 400;
+  color: #2f234f;
+  text-decoration: none;
+}
+
+.nav-elements ul a.active {
+  color: #574c4c;
+  font-weight: 500;
+  position: relative;
+}
+
+.nav-elements ul a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #4b4343;
+}
+
+@media (max-width: 768px) {
+  .nav-elements ul li:not(:last-child) {
+    margin-right: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hamburger {
+    display: block;
+    cursor: pointer;
+  }
+
+  .nav-elements {
+    position: absolute;
+    right: 0;
+    top: 60px;
+    background-color: #000000;
+    opacity: 0.8;
+    width: 0px;
+    height: auto;
+    padding-block: 20px;
+    border-radius: 20px;
+    font-weight: 700;
+    transition: all 0.3s ease-in;
+    overflow: hidden;
+  }
+
+  .nav-elements.active {
+    width: 170px;
+  }
+
+  .nav-elements ul {
+    display: flex;
+    flex-direction: column;
+    margin-left: 24px;
+  }
+
+  .nav-elements ul li {
+    margin-right: unset;
+    margin-top: 23px;
+  }
+  .nav-contact{
+    border-radius: 0;
+    padding: 0 0;
+    background: transparent;
+    color: white;
+    
+}
 }
