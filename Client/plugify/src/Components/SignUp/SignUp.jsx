@@ -42,7 +42,7 @@ const SignInSignUpForm = () => {
     {
       const { username, password, email } = data;
       try {  
-        const response = await axios.post(`https://calf-kings.onrender.com/signup`, { username, password, email });
+        const response = await axios.post(`https://plugify.onrender.com/adminsignup`, { username, password, email });
         if (response.status === 200) {
           navigate("/");
         }
@@ -55,7 +55,7 @@ const SignInSignUpForm = () => {
   const onSubmitSignIn = async (data) => {
     const { username, password } = data;
     try {
-      const response = await axios.post(`https://calf-kings.onrender.com/login`, { username, password });
+      const response = await axios.post(`https://plugify.onrender.com/adminlogin`, { username, password });
       if (response.status === 200) {
         console.log(username)
         navigate("/");

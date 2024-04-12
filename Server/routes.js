@@ -3,7 +3,19 @@ const app = express();
 const { getConnectionStatus } = require("./db");
 const { userModel } = require("./schema");
 const { adminModel } = require("./adminSchema.js");
+const Joi = require("joi");
 app.use(express.json());
+
+const adminSignupSchema = Joi.object({
+  username: Joi.string().required(),
+  password: Joi.string().required(),
+  email: Joi.string().email().required(),
+});
+
+const adminLoginSchema = Joi.object({
+  username: Joi.string().required(),
+  password: Joi.string().required(),
+});
 
 // GET request to get connection status
 app.get("/", async (req, res) => {
@@ -23,20 +35,27 @@ app.get("/data", async (req, res) => {
 
 app.post("/adminsignup", async (req, res) => {
   try {
-    const user = await adminModel.create({
-      username: req.body.username,
-      password: req.body.password,
-      email: req.body.email,
-    });
+    const { error, value } = adminSignupSchema.validate(req.body);
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
+    }
+    const user = await adminModel.create(value);
     res.send(user);
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
+    if (err.name === "MongoDBNetworkError") {
+      return res.status(500).json({ error: "Database connection error" });
+    }
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 app.post("/adminlogin", async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await adminModel.findOne({ username, password });
+    const { error, value } = adminLoginSchema.validate(req.body);
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
+    }
+    const user = await adminModel.findOne(value);
 
     if (!user) {
       return res.status(401).json({ error: "Invalid username / password" });
@@ -45,6 +64,9 @@ app.post("/adminlogin", async (req, res) => {
     res.status(200).json({ user });
   } catch (err) {
     console.error(err);
+    if (err.name === "MongoDBNetworkError") {
+      return res.status(500).json({ error: "Database connection error" });
+    }
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
