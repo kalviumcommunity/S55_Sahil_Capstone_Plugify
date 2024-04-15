@@ -10,6 +10,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<ParentComponent />} />
           <Route path="/contact" element={<Contact />}/>
+          <Route path='/signup' element={<SignInSignUpForm />} />
       </Routes>
       {/* <SignInSignUpForm/> */}
     </div>

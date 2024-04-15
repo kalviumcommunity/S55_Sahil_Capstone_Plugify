@@ -3,6 +3,7 @@ import Background from '../HomePage/Background/Background';
 import Navbar from '../HomePage/Navbar/Navbar';
 import Hero from '../HomePage/Hero/Hero';
 import SignInSignUpForm from '../SignUp/SignUp';
+import StationListing from '../HomePage/StationListing/StationListing'
 
 function ParentComponent() {
   let heroData = [
@@ -32,7 +33,7 @@ function ParentComponent() {
         setHeroCount={setHeroCount}
         playStatus={playStatus}
       />
-      <SignInSignUpForm/>
+      <StationListing/>
     </>
   )
 }
