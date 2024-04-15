@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import Background from '../HomePage/Background/Background';
 import Navbar from '../HomePage/Navbar/Navbar';
 import Hero from '../HomePage/Hero/Hero';
-import SignInSignUpForm from '../SignUp/SignUp';
 import StationListing from '../HomePage/StationListing/StationListing'
 
 function ParentComponent() {
