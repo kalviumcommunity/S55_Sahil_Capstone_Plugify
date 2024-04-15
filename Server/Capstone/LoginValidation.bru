@@ -1,0 +1,18 @@
+meta {
+  name: LoginValidation
+  type: http
+  seq: 3
+}
+
+post {
+  url: https://plugify.onrender.com/adminlogin
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "username":"sahil_k17",
+    "password":"1234567"
+  }
+}

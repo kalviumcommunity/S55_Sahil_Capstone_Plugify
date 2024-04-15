@@ -1,0 +1,19 @@
+meta {
+  name: SignUpValidation
+  type: http
+  seq: 4
+}
+
+post {
+  url: https://plugify.onrender.com/adminsignup
+  body: json
+  auth: none
+}
+
+body:json {
+  {  
+    "username":"hello",
+    "password":"1234567",
+    "email":"sahilk@gmail.com"
+  }
+}
