@@ -8,7 +8,7 @@ import Step2 from '../../../assets/pin.png'
 import Step3 from '../../../assets/stopwatch.png'
 import { Link } from "react-router-dom";
 
-function Contact() {
+function StationListing() {
 
   return (
     <>
@@ -70,4 +70,4 @@ function Contact() {
   );
 }
 
-export default Contact;
+export default StationListing;
