@@ -15,8 +15,9 @@ app.get('/data', async (req, res) => {
         const users = await userModel.find();
         res.json(users);
     } catch (error) {
-        console.error('Error in /data route:', error);
-        res.status(500).send('Error in /data route:');
+        //Worked on CodiumAI Agent Review
+        console.error('Error in /data route: ', error);
+        res.status(500).send('Error in /data route: ');
     }
 });
 
