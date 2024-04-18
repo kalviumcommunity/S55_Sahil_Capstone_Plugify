@@ -28,8 +28,8 @@ app.get("/data", async (req, res) => {
     const users = await userModel.find();
     res.json(users);
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal Server Error");
+    console.error('Error in /data route:', error);
+    res.status(500).send('Error in /data route:');
   }
 });
 
