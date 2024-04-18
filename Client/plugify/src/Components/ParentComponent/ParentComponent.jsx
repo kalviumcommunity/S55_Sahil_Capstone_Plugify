@@ -3,6 +3,8 @@ import Background from '../HomePage/Background/Background';
 import Navbar from '../HomePage/Navbar/Navbar';
 import Hero from '../HomePage/Hero/Hero';
 import StationListing from '../HomePage/StationListing/StationListing'
+import NearbyStations from '../HomePage/NearbyStations/NearbyStations';
+import Footer from '../HomePage/Footer/Footer';
 
 function ParentComponent() {
   let heroData = [
@@ -33,6 +35,8 @@ function ParentComponent() {
         playStatus={playStatus}
       />
       <StationListing/>
+      <NearbyStations/>
+      <Footer/>
     </>
   )
 }

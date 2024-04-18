@@ -1,0 +1,128 @@
+.nearby-cont{
+    width: 100%;
+    height: auto;
+    background-color: #f6ffff;
+    display: flex;
+    justify-content: space-between;
+    padding: 100px 20px 35px 35px;
+    column-gap: 60px;
+    padding-bottom: 100px;
+}
+
+.nearby-photo, .nearby-right-panel, .nearby-img{
+    width: 100%;
+    height: auto;
+}
+
+.nearby-right-panel{
+    text-align: center;
+    color: black;
+}
+
+.nearby-img{
+    border-radius: 20px;
+    /* box-shadow: 0px 0px 15px rgb(196, 196, 196); */
+}
+
+.nearby-tagline{
+    font-size: 2.3rem;
+}
+
+.nearby-desc{
+    margin-top: 25px;
+    color: rgb(37, 37, 37);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding-inline: 50px;
+}
+
+.nearby-grid{
+    margin-block: 80px;
+    margin-inline: 50px;
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 10px;
+}
+
+.grid-icon{
+    height: 40px;
+    width: 40px;
+}
+
+.grid-item {
+    width: 100%;
+    /* display: flex; */
+    flex-direction: column;
+    background-color: rgb(225, 239, 252);
+    padding: 20px;
+    font-size: 1.2rem;
+    /* justify-content: start;
+    text-align: start; */
+}
+
+.grid-item h5{
+    margin-top: 10px;
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.nearby-btn{
+    text-decoration: none;
+    padding: 15px 20px;
+    border: 3px inset rgb(12, 12, 12);
+    border-radius: 50px;
+    color: #000000;
+    background:
+      linear-gradient(-45deg, #000  40%, #fff 0 60%, #000  0) right/300% 100% no-repeat,
+      linear-gradient(-45deg, #0000 40%, #1e231e 0 60%, #0000 0) right/300% 100% no-repeat;
+    -webkit-background-clip: text, padding-box;
+    background-clip: text, padding-box;
+    transition: 1s;
+    font-weight: 600;
+    background-color: #fff;
+}
+
+.nearby-btn:hover {
+    background-position: left;
+    color: #f7f7d7;
+    background-color: #1a1a1a;
+}
+
+
+
+@media (max-width: 850px) {
+    .nearby-cont{
+        flex-wrap: wrap;
+        row-gap: 50px;
+    }
+
+    .nearby-img{
+        border-radius: 13px;
+        box-shadow: 0px 0px 10px  rgb(196, 196, 196);
+    }
+
+    .grid-icon{
+        height: 30px;
+        width: 30px;
+    }
+
+  }
+  
+  @media (max-width: 480px) {
+
+    .nearby-grid{
+        grid-template-columns: auto;
+        padding-block: 40px;
+    }
+
+    .grid-icon{
+        height: 30px;
+        width: 30px;
+    }
+
+    .grid-item {
+        padding: 10vw;
+        font-size: 1.2rem;
+    }
+
+  }
