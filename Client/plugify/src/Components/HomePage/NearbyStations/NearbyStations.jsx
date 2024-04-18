@@ -28,11 +28,11 @@ function NearbyStations() {
             </h5>
           </div>
           <div className="nearby-grid">
-            <div class="grid-item">
+            <div className="grid-item">
               <img className="grid-icon" src={Calendar} alt="Calendar icon" />
               <h5><b>Plan</b> beforehand</h5>
             </div>
-            <div class="grid-item">
+            <div className="grid-item">
               <img
                 className="grid-icon"
                 src={Connections}
@@ -40,7 +40,7 @@ function NearbyStations() {
               />
               <h5><b>Seamless</b> Connectivity</h5>
             </div>
-            <div class="grid-item">
+            <div className="grid-item">
               <img
                 className="grid-icon"
                 src={ElectricCar}
@@ -48,7 +48,7 @@ function NearbyStations() {
               />
               <h5><b>Convenient</b> trip</h5>
             </div>
-            <div class="grid-item">
+            <div className="grid-item">
               <img className="grid-icon" src={ElectricCar} alt="" />
             </div>
           </div>
