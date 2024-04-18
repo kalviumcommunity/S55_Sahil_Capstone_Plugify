@@ -99,9 +99,15 @@ function Contact() {
                   type="email"
                   name="email"
                   className="input"
-                  {...register("email", { required: true })}
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "Invalid email address",
+                    },
+                  })}
                 />
-                {errors.email && <p className="error">Email is required</p>}
+                {errors.email && <p className="error">{errors.email.message}</p>}
               </div>
               <div className="input-container">
                 <label htmlFor="phone" className={errors.phone ? "active" : ""}>
