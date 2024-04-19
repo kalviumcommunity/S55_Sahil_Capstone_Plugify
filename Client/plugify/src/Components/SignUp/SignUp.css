@@ -264,6 +264,26 @@ form.sign-in-form {
   color: red;
 }
 
+.success-message {
+  background-color: rgb(76, 164, 5);
+  position: absolute; 
+  top: -25%; 
+  left: 20px; 
+  padding-block: 15px;
+  padding-inline: 10px;
+  min-height: 50px; 
+  width: calc(100% - 40px);
+  max-width: 220px;
+  font-size: 1.1rem; 
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-weight: bolder;
+  border: 3.2px solid rgb(225, 225, 225);
+  box-shadow: 2px 8px 10px 0 rgb(37, 1, 53);
+  z-index: 1000; 
+  box-sizing: border-box; 
+}
+
 @media (max-width: 870px) {
   .signup-container {
     min-height: 800px;
@@ -365,6 +385,10 @@ form.sign-in-form {
     top: 5%;
     transform: translate(-50%, 0);
   }
+
+  .success-message {
+    top: -4%; 
+  }
 }
 
 @media (max-width: 570px) {
@@ -390,5 +414,13 @@ form.sign-in-form {
   .signup-container.sign-up-mode:before {
     bottom: 28%;
     left: 50%;
+  }
+
+  .success-message {
+    top: -4%; 
+    padding: 10px;
+    min-height: 20px; 
+    max-width: 260px;
+    font-size: 0.7rem; 
   }
 }
