@@ -10,8 +10,8 @@ import {
   faLinkedinIn,
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
 
 const SignInSignUpForm = () => {
   const {
@@ -26,7 +26,8 @@ const SignInSignUpForm = () => {
   } = useForm();
 
   const [isSignUpMode, setIsSignUpMode] = useState(false);
-  const [loginMessage, setLoginMessage] = useState('');
+  const [showSignupSuccessMessage, setShowSignupSuccessMessage] =
+    useState(false);
   const navigate = useNavigate();
 
   const handleSignUpClick = () => {
@@ -41,30 +42,40 @@ const SignInSignUpForm = () => {
     console.log(data);
     {
       const { username, password, email } = data;
-      try {  
-        const response = await axios.post(`https://plugify.onrender.com/adminsignup`, { username, password, email });
+      try {
+        const response = await axios.post(
+          `https://plugify.onrender.com/adminsignup`,
+          { username, password, email }
+        );
         if (response.status === 200) {
-          navigate("/");
+          setShowSignupSuccessMessage(true);
+          setTimeout(() => {
+            setShowSignupSuccessMessage(false);
+          }, 5000);
         }
       } catch (err) {
         console.error(err);
       }
-    };
+    }
   };
 
   const onSubmitSignIn = async (data) => {
     const { username, password } = data;
     try {
-      const response = await axios.post(`https://plugify.onrender.com/adminlogin`, { username, password });
+      const response = await axios.post(
+        `https://plugify.onrender.com/adminlogin`,
+        { username, password }
+      );
       if (response.status === 200) {
-        console.log(username)
+        console.log(username);
+        sessionStorage.setItem('login', true);
         navigate("/");
       } else {
-        setLoginMessage('Invalid Credentials');
+        setLoginMessage("Invalid Credentials");
       }
     } catch (err) {
       console.error(err);
-      setLoginMessage('Invalid Credentials');
+      setLoginMessage("Invalid Credentials");
     }
   };
 
@@ -134,6 +145,9 @@ const SignInSignUpForm = () => {
             onSubmit={handleSignupSubmit(onSubmitSignUp)}
             className={`sign-up-form ${isSignUpMode ? "" : "hidden"}`}
           >
+            {showSignupSuccessMessage && (
+              <div className="success-message">Sign Up Successful! You can now log in.</div>
+            )}
             <h2 className="title-signup">Sign up</h2>
             <div className="input-field">
               <FontAwesomeIcon icon={faUser} className="fas fa-user" />
