@@ -69,7 +69,8 @@ const SignInSignUpForm = () => {
       if (response.status === 200) {
         console.log(username);
         sessionStorage.setItem('login', true);
-        navigate("/");
+        sessionStorage.setItem('username', username);
+        navigate("/dashboard");
       } else {
         setLoginMessage("Invalid Credentials");
       }

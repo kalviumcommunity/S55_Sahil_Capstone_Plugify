@@ -17,6 +17,14 @@ const adminLoginSchema = Joi.object({
   password: Joi.string().required(),
 });
 
+const updateSchema = Joi.object({
+  img_url: Joi.string().required(),
+  contact_no: Joi.number().required(),
+  price_per_min: Joi.number().required(),
+  google_maps_link: Joi.string().required(),
+  charge_type: Joi.string().required(),
+});
+
 // GET request to get connection status
 app.get("/", async (req, res) => {
   const connectionStatus = await getConnectionStatus();
@@ -77,6 +85,20 @@ app.post("/adminlogout", (req, res) => {
   res.clearCookie("email");
 
   res.status(200).json({ message: "Logout succesful" });
+});
+
+app.post('/add', async (req, res) => {
+  try {
+      const { error, value } = updateSchema.validate(req.body);
+      if (error) {
+          return res.status(400).send(error.details[0].message);
+      }
+      const newData = await userModel.create(value);
+      res.send(newData);
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Error');
+  }
 });
 
 app.get("/hello", function (req, res) {
