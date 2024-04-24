@@ -1,0 +1,21 @@
+.listing-page-cont{
+    display: flex;
+    width: 100%;
+    height: auto;
+}
+
+.side-navbar{
+    width: 250px;
+    height: 100vh;
+    background-color: #dcc293;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.card-cont{
+    width: 90%;
+    height: 100vh;
+    background-color: #010000;
+}

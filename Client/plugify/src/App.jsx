@@ -1,6 +1,7 @@
 import './App.css'
 import Contact from './Components/HomePage/Contact/Contact';
 import ParentComponent from './Components/ParentComponent/ParentComponent';
+import Dashboard from './Components/ListingPage/Dashboard/Dashboard'
 import { Routes, Route } from "react-router-dom";
 import Login from './Components/SignUp/SignUp';
 
@@ -11,6 +12,7 @@ export default function App() {
           <Route path="/" element={<ParentComponent />} />
           <Route path="/contact" element={<Contact />}/>
           <Route path='/signup' element={<Login />} />
+          <Route path='/dashboard' element={<Dashboard />} />
       </Routes>
     </div>
   );
