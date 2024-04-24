@@ -15,7 +15,6 @@ const Navbar = () => {
       <div className="listing-page-cont">
         <nav className="side-navbar">
             <div>
-                <img src="" alt="" />
                 <h2>{sessionStorage.getItem('username')}</h2>
             </div>
             <div>asdasd</div>

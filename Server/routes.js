@@ -18,10 +18,10 @@ const adminLoginSchema = Joi.object({
 });
 
 const updateSchema = Joi.object({
-  img_url: Joi.string().required(),
+  img_url: Joi.string().required().uri(),
   contact_no: Joi.number().required(),
   price_per_min: Joi.number().required(),
-  google_maps_link: Joi.string().required(),
+  google_maps_link: Joi.string().required().uri(),
   charge_type: Joi.string().required(),
 });
 
@@ -91,7 +91,8 @@ app.post('/add', async (req, res) => {
   try {
       const { error, value } = updateSchema.validate(req.body);
       if (error) {
-          return res.status(400).send(error.details[0].message);
+        const errorMessage = error.details.map(detail => detail.message).join('; ');
+        return res.status(400).send(errorMessage);
       }
       const newData = await userModel.create(value);
       res.send(newData);
