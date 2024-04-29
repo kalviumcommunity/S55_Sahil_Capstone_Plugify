@@ -69,7 +69,7 @@ const SignInSignUpForm = () => {
       if (response.status === 200) {
         try {
           const authResponse = await axios.post(
-            `http://localhost:3000/auth`, 
+            `https://plugify.onrender.com/auth`, 
             { username, password }
           );
           console.log(authResponse.data);
