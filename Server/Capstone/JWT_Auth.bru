@@ -5,7 +5,14 @@ meta {
 }
 
 post {
-  url: http://localhost:3000/auth
-  body: none
+  url: https://plugify.onrender.com/auth
+  body: json
   auth: none
+}
+
+body:json {
+  {
+  "username":"sahilk_17",
+  "password":"123456"
+  }
 }

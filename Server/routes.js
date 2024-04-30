@@ -115,11 +115,13 @@ app.post('/auth',async(req,res)=>{
           password : req.body.password
       }
       const token = jwt.sign(user,tok)
+      res.setHeader('Content-Security-Policy', "script-src 'self'");
       res.cookie('token',token,{maxAge:365*24*60*60*1000})
       res.status(200).json(token)
 
   }catch(err){
       console.log(err)
+      res.status(500).json({ error: 'Authentication Error' });
   }
 })
 
