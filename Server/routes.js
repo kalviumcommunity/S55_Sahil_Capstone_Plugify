@@ -4,6 +4,8 @@ const { getConnectionStatus } = require("./db");
 const { userModel } = require("./schema");
 const { adminModel } = require("./adminSchema.js");
 const Joi = require("joi");
+const jwt = require('jsonwebtoken');
+const tok = process.env.ACCESS_TOKEN
 app.use(express.json());
 
 const adminSignupSchema = Joi.object({
@@ -105,5 +107,22 @@ app.post('/add', async (req, res) => {
 app.get("/hello", function (req, res) {
   res.send("Hello");
 });
+
+app.post('/auth',async(req,res)=>{
+  try{
+      const user = {
+          username:req.body.username,
+          password : req.body.password
+      }
+      const token = jwt.sign(user,tok)
+      res.setHeader('Content-Security-Policy', "script-src 'self'");
+      res.cookie('token',token,{maxAge:365*24*60*60*1000})
+      res.status(200).json(token)
+
+  }catch(err){
+      console.log(err)
+      res.status(500).json({ error: 'Authentication Error' });
+  }
+})
 
 module.exports = app;

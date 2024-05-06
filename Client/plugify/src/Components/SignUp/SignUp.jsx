@@ -67,6 +67,18 @@ const SignInSignUpForm = () => {
         { username, password }
       );
       if (response.status === 200) {
+        try {
+          const authResponse = await axios.post(
+            `https://plugify.onrender.com/auth`, 
+            { username, password }
+          );
+          console.log(authResponse.data);
+          document.cookie = `ACCESS_TOKEN=${authResponse.data}; HttpsOnly; Secure`;
+        } catch (authError) {
+          console.error(authError);
+          alert('Authentication Error!');
+        }
+        
         console.log(username);
         sessionStorage.setItem('login', true);
         sessionStorage.setItem('username', username);
@@ -79,6 +91,7 @@ const SignInSignUpForm = () => {
       setLoginMessage("Invalid Credentials");
     }
   };
+  
 
   return (
     <div className={`signup-container ${isSignUpMode ? "sign-up-mode" : ""}`}>
