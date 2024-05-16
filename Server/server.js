@@ -2,8 +2,16 @@ const express = require('express');
 const app = express();
 const app_routes = require('./routes')
 var cors = require('cors')
+const dotenv = require('dotenv');
+dotenv.config();
 
-app.use(cors())
+
+app.use((req, res, next) => {
+    res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+    res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+    next();
+  });
+app.use(cors({ origin: process.env.CORS_ORIGIN, credentials: true }));
 app.use('/', app_routes);
 const{startDatabase} = require('./db')
 
