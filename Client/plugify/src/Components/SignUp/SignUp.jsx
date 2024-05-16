@@ -31,17 +31,31 @@ const SignUpForm = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const initGoogleSignIn = () => {
-      window.gapi.load("auth2", () => {
-        const auth2 = window.gapi.auth2.init({
-          client_id:
-            "579654138713-b57co5p24mjrd9l67i9neb7fecuem42p.apps.googleusercontent.com",
-          scope: "email",
+    const initGoogleSignIn = async () => {
+      try {
+        await new Promise((resolve, reject) => {
+          window.gapi.load("auth2", {
+            callback: () => {
+              const auth2 = window.gapi.auth2.init({
+                client_id:
+                  "579654138713-b57co5p24mjrd9l67i9neb7fecuem42p.apps.googleusercontent.com",
+                scope: "email",
+              });
+              setGoogleAuth(auth2);
+              resolve();
+            },
+            onerror: (error) => {
+              console.error("Google API load error:", error);
+              reject(error);
+            },
+          });
         });
-        setGoogleAuth(auth2);
-      });
+      } catch (error) {
+        console.error("Error initializing Google API:", error);
+        alert("Failed to initialize Google sign-in. Please try again later.");
+      }
     };
-
+  
     initGoogleSignIn();
   }, []);
 
