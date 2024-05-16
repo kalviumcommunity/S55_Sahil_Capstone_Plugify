@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 import "./SignUp.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
@@ -13,7 +12,7 @@ import {
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
-const SignInSignUpForm = () => {
+const SignUpForm = () => {
   const {
     register: loginRegister,
     handleSubmit: handleLoginSubmit,
@@ -28,7 +27,38 @@ const SignInSignUpForm = () => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const [showSignupSuccessMessage, setShowSignupSuccessMessage] =
     useState(false);
+  const [googleAuth, setGoogleAuth] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const initGoogleSignIn = () => {
+      window.gapi.load("auth2", () => {
+        const auth2 = window.gapi.auth2.init({
+          client_id:
+            "579654138713-b57co5p24mjrd9l67i9neb7fecuem42p.apps.googleusercontent.com",
+          scope: "email",
+        });
+        setGoogleAuth(auth2);
+      });
+    };
+
+    initGoogleSignIn();
+  }, []);
+
+  const handleGoogleLogin = async () => {
+    try {
+      const googleUser = await googleAuth.signIn();
+      const profile = googleUser.getBasicProfile();
+      const email = profile.getEmail();
+      console.log("Logged in with Google:", email);
+    } catch (error) {
+      if (error.error === "popup_closed_by_user") {
+        console.log("Google sign-in popup was closed by the user.");
+      } else {
+        console.error("Google login failed:", error);
+      }
+    }
+  };
 
   const handleSignUpClick = () => {
     setIsSignUpMode(true);
@@ -69,19 +99,19 @@ const SignInSignUpForm = () => {
       if (response.status === 200) {
         try {
           const authResponse = await axios.post(
-            `https://plugify.onrender.com/auth`, 
+            `https://plugify.onrender.com/auth`,
             { username, password }
           );
           console.log(authResponse.data);
           document.cookie = `ACCESS_TOKEN=${authResponse.data}; HttpsOnly; Secure`;
         } catch (authError) {
           console.error(authError);
-          alert('Authentication Error!');
+          alert("Authentication Error!");
         }
-        
+
         console.log(username);
-        sessionStorage.setItem('login', true);
-        sessionStorage.setItem('username', username);
+        sessionStorage.setItem("login", true);
+        sessionStorage.setItem("username", username);
         navigate("/dashboard");
       } else {
         setLoginMessage("Invalid Credentials");
@@ -91,7 +121,6 @@ const SignInSignUpForm = () => {
       setLoginMessage("Invalid Credentials");
     }
   };
-  
 
   return (
     <div className={`signup-container ${isSignUpMode ? "sign-up-mode" : ""}`}>
@@ -142,7 +171,8 @@ const SignInSignUpForm = () => {
                 <FontAwesomeIcon icon={faXTwitter} className="icon " />
               </a>
               <a
-                href="https://www.instagram.com/sahil_k17/"
+                href="#"
+                onClick={handleGoogleLogin}
                 className="google bg-color"
               >
                 <FontAwesomeIcon icon={faGoogle} className="icon" />
@@ -160,7 +190,9 @@ const SignInSignUpForm = () => {
             className={`sign-up-form ${isSignUpMode ? "" : "hidden"}`}
           >
             {showSignupSuccessMessage && (
-              <div className="success-message">Sign Up Successful! You can now log in.</div>
+              <div className="success-message">
+                Sign Up Successful! You can now log in.
+              </div>
             )}
             <h2 className="title-signup">Sign up</h2>
             <div className="input-field">
@@ -224,7 +256,8 @@ const SignInSignUpForm = () => {
                 <FontAwesomeIcon icon={faXTwitter} className="icon " />
               </a>
               <a
-                href="https://www.instagram.com/sahil_k17/"
+                href="#"
+                onClick={handleGoogleLogin}
                 className="google bg-color"
               >
                 <FontAwesomeIcon icon={faGoogle} className="icon" />
@@ -280,4 +313,4 @@ const SignInSignUpForm = () => {
   );
 };
 
-export default SignInSignUpForm;
+export default SignUpForm;
