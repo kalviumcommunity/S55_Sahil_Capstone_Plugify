@@ -43,6 +43,22 @@ app.get("/data", async (req, res) => {
   }
 });
 
+app.post('/userExists', async (req, res) => {
+  try {
+      console.log("REQ BODY", req.body)
+      const user = await adminModel.findOne({ "username": req.body.username })
+      if (!user) {
+          return res.status(200).json({ error: 'No Username Exists' });
+      } else {
+          console.log(user);
+          return res.status(201).json({ success: true, message: 'username Exists' });
+      }
+  }
+  catch (err) {
+      console.log(err)
+  }
+})
+
 app.post("/adminsignup", async (req, res) => {
   try {
     const { error, value } = adminSignupSchema.validate(req.body);

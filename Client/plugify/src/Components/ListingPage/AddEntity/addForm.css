@@ -1,7 +1,10 @@
+body{
+  background-color: black;
+}
+
 .addform-container {
   font-family: "DM Serif Display", serif;
-  background-color: rgb(254, 254, 246);
-  background-image: url("https://kalvium.community/images/launcher-hero-bg.svg");
+  background-color: rgb(69, 69, 67);
   object-fit: cover;
   background-position: start;
   background-repeat: repeat;
@@ -11,7 +14,7 @@
   margin-inline: auto;
   margin-top: 12vh;
   padding-block: 60px;
-  padding-inline: 25px;
+  padding-inline: 8px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,7 +39,7 @@
 .add-form-label {
   width: 100%;
   margin-top: 10px;
-  color: rgb(63, 63, 63);
+  color: rgb(255, 255, 255);
   font-weight: bold;
 }
 
@@ -47,8 +50,8 @@ input,
   font-size: 1rem;
   border: none;
   border-radius: 5px;
-  background-color: rgb(228, 228, 228);
-  color: rgb(63, 63, 63);
+  background-color: rgb(142, 142, 142);
+  color: rgb(255, 255, 255);
 }
 
 .button {

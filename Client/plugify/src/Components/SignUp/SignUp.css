@@ -284,6 +284,11 @@ form.sign-in-form {
   box-sizing: border-box; 
 }
 
+.popup{
+  /* width: 400px; */
+  margin-left: 1000px;
+}
+
 @media (max-width: 870px) {
   .signup-container {
     min-height: 800px;

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import "./addForm.css";
 
-function addForm() {
+function AddForm() {
   const {
     register,
     handleSubmit,
@@ -20,7 +20,8 @@ function addForm() {
     axios
       .post("https://plugify.onrender.com/add", updatedFormData)
       .then(() => {
-        sessionStorage.setItem("registrationSuccess", "true");
+        console.log("Location added");
+        localStorage.setItem("locationAdded", true);
         navigate("/dashboard");
       })
       .catch((error) => {
@@ -30,9 +31,6 @@ function addForm() {
 
   return (
     <div className="addform-container">
-      {/* <div className="bg">
-        <img src={bgIMG} alt="" className="bgIMG"/>
-      </div> */}
       <form className="addform" onSubmit={handleSubmit(onSubmit)}>
         <label className="add-form-label">Img Url:</label>
         <input
@@ -58,7 +56,7 @@ function addForm() {
         />
         {errors.contact_no && <p className="add-error">Contact is required</p>}
 
-        <label className="add-form-label">Price/min:</label>
+        <label className="add-form-label">Price/min:(Rupees)</label>
         <input
           type="number"
           {...register("price_per_min", { required: true })}
@@ -95,4 +93,4 @@ function addForm() {
   );
 }
 
-export default addForm;
+export default AddForm;
