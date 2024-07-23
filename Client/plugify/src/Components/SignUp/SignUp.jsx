@@ -3,14 +3,10 @@ import { useForm } from "react-hook-form";
 import "./SignUp.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
-import {
-  faFacebookF,
-  faGoogle,
-  faLinkedinIn,
-  faXTwitter,
-} from "@fortawesome/free-brands-svg-icons";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
 const SignUpForm = () => {
   const {
@@ -27,52 +23,15 @@ const SignUpForm = () => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const [showSignupSuccessMessage, setShowSignupSuccessMessage] =
     useState(false);
-  const [googleAuth, setGoogleAuth] = useState(null);
+
+  const [googleUserData, setGoogleUserData] = useState({});
+  const [showUsername, setShowUsername] = useState(true);
+  const [username, setUsername] = useState("");
+  const [done, setDone] = useState(false);
+
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const initGoogleSignIn = async () => {
-      try {
-        await new Promise((resolve, reject) => {
-          window.gapi.load("auth2", {
-            callback: () => {
-              const auth2 = window.gapi.auth2.init({
-                client_id:
-                  "579654138713-b57co5p24mjrd9l67i9neb7fecuem42p.apps.googleusercontent.com",
-                scope: "email",
-              });
-              setGoogleAuth(auth2);
-              resolve();
-            },
-            onerror: (error) => {
-              console.error("Google API load error:", error);
-              reject(error);
-            },
-          });
-        });
-      } catch (error) {
-        console.error("Error initializing Google API:", error);
-        alert("Failed to initialize Google sign-in. Please try again later.");
-      }
-    };
-  
-    initGoogleSignIn();
-  }, []);
-
-  const handleGoogleLogin = async () => {
-    try {
-      const googleUser = await googleAuth.signIn();
-      const profile = googleUser.getBasicProfile();
-      const email = profile.getEmail();
-      console.log("Logged in with Google:", email);
-    } catch (error) {
-      if (error.error === "popup_closed_by_user") {
-        console.log("Google sign-in popup was closed by the user.");
-      } else {
-        console.error("Google login failed:", error);
-      }
-    }
-  };
+  // const clientID = "934760259390-idpvnt9md5ov9pr4lnoufcb0obh56eue.apps.googleusercontent.com";
 
   const handleSignUpClick = () => {
     setIsSignUpMode(true);
@@ -82,26 +41,107 @@ const SignUpForm = () => {
     setIsSignUpMode(false);
   };
 
+  async function createUserSignup() {
+    await axios
+      .post(
+        `https://studio-backend-alpha.vercel.app/googleAuthSignup/${username}`,
+        googleUserData
+      )
+      .then((response) => {
+        localStorage.setItem("userID", response.data._id);
+        localStorage.setItem("user", true);
+        navigate("/dashboard");
+      })
+      .catch((err) => console.log(err));
+  }
+
+  async function handleUsername() {
+    setDone(true);
+    await axios
+      .post("https://studio-backend-alpha.vercel.app/userExists", {
+        username: username,
+      })
+      .then((test) => {
+        if (test.status === 200) {
+          createUserSignup();
+        } else {
+          setDone(false);
+          alert("Username Not Available");
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
+  async function createUser(data) {
+    setGoogleUserData(data);
+    setShowUsername(false);
+  }
+
+  async function loginUser(data) {
+    await axios
+      .post("https://studio-backend-alpha.vercel.app/googleAuthLogin", data)
+      .then((response) => {
+        if (response.status === 201) {
+          localStorage.setItem("userID", response.data._id);
+          localStorage.setItem("user", true);
+        }
+        navigate("/dashboard");
+      })
+      .catch((err) => console.log(err));
+  }
+
+  async function onSuccess(res) {
+    const decoded = jwtDecode(res.credential);
+    await axios
+      .post("https://studio-backend-alpha.vercel.app/googleAuthID", decoded)
+      .then((data) => {
+        if (data.status === 200) {
+          createUser(decoded);
+        } else if (data.status === 201) {
+          loginUser(decoded);
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function onFailure(res) {
+    console.log("Login Failed, Res -> ", res);
+  }
+
   const onSubmitSignUp = async (data) => {
-    console.log(data);
-    {
-      const { username, password, email } = data;
-      try {
+    const { username, password, email } = data;
+    try {
+      // Check if the user exists
+      const userExistsResponse = await axios.post(
+        `https://plugify.onrender.com/userExists`,
+        { username }
+      );
+  
+      if (userExistsResponse.status === 201 && userExistsResponse.data.success) {
+        // If user exists, show error message
+        console.error("Username already exists. Please choose another one.");
+        alert("Username already exists. Please choose another one.");
+      } else {
+        // If user does not exist, proceed with signup
         const response = await axios.post(
           `https://plugify.onrender.com/adminsignup`,
           { username, password, email }
         );
+  
         if (response.status === 200) {
           setShowSignupSuccessMessage(true);
           setTimeout(() => {
             setShowSignupSuccessMessage(false);
           }, 5000);
         }
-      } catch (err) {
-        console.error(err);
       }
+    } catch (err) {
+      console.error(err);
     }
   };
+  
+
+  
 
   const onSubmitSignIn = async (data) => {
     const { username, password } = data;
@@ -116,14 +156,12 @@ const SignUpForm = () => {
             `https://plugify.onrender.com/auth`,
             { username, password }
           );
-          console.log(authResponse.data);
           document.cookie = `ACCESS_TOKEN=${authResponse.data}; HttpsOnly; Secure`;
         } catch (authError) {
           console.error(authError);
           alert("Authentication Error!");
         }
 
-        console.log(username);
         sessionStorage.setItem("login", true);
         sessionStorage.setItem("username", username);
         navigate("/dashboard");
@@ -135,6 +173,14 @@ const SignUpForm = () => {
       setLoginMessage("Invalid Credentials");
     }
   };
+
+  const handleChange = (event) => {
+    setUsername(event.target.value);
+  };
+
+  useEffect(() => {
+    document.title = `Login - Plugify'`;
+  }, []);
 
   return (
     <div className={`signup-container ${isSignUpMode ? "sign-up-mode" : ""}`}>
@@ -171,32 +217,15 @@ const SignUpForm = () => {
             )}
             <input type="submit" value="Login" className="signup-btn solid" />
             <p className="social-text">Or Login with social platforms</p>
-            <div className="social-icons flex-centre">
-              <a
-                href="https://www.instagram.com/sahil_k17/"
-                className="facebook bg-color"
-              >
-                <FontAwesomeIcon icon={faFacebookF} className="icon" />
-              </a>
-              <a
-                href="https://www.instagram.com/sahil_k17/"
-                className="twitter bg-color"
-              >
-                <FontAwesomeIcon icon={faXTwitter} className="icon " />
-              </a>
-              <a
-                href="#"
-                onClick={handleGoogleLogin}
-                className="google bg-color"
-              >
-                <FontAwesomeIcon icon={faGoogle} className="icon" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/sahil-kharatmol-229912273/"
-                className="linkedin bg-color"
-              >
-                <FontAwesomeIcon icon={faLinkedinIn} className="icon" />
-              </a>
+            <div>
+              <GoogleLogin
+                onSuccess={onSuccess}
+                onError={onFailure}
+                className="padding"
+                text="continue_with"
+                size="medium"
+                width="250"
+              />
             </div>
           </form>
           <form
@@ -255,33 +284,16 @@ const SignUpForm = () => {
               <p className="error-message">{signupErrors.password.message}</p>
             )}
             <input type="submit" value="Sign up" className="signup-btn" />
-            <p className="social-text">Or Sign up with social platforms</p>
-            <div className="social-icons flex-centre">
-              <a
-                href="https://www.instagram.com/sahil_k17/"
-                className="facebook bg-color"
-              >
-                <FontAwesomeIcon icon={faFacebookF} className="icon" />
-              </a>
-              <a
-                href="https://www.instagram.com/sahil_k17/"
-                className="twitter bg-color"
-              >
-                <FontAwesomeIcon icon={faXTwitter} className="icon " />
-              </a>
-              <a
-                href="#"
-                onClick={handleGoogleLogin}
-                className="google bg-color"
-              >
-                <FontAwesomeIcon icon={faGoogle} className="icon" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/sahil-kharatmol-229912273/"
-                className="linkedin bg-color"
-              >
-                <FontAwesomeIcon icon={faLinkedinIn} className="icon" />
-              </a>
+            <p className="social-text">Or Sign up with Google</p>
+            <div>
+              <GoogleLogin
+                onSuccess={onSuccess}
+                onError={onFailure}
+                className="padding"
+                text="continue_with"
+                size="medium"
+                width="250"
+              />
             </div>
           </form>
         </div>
@@ -293,38 +305,64 @@ const SignUpForm = () => {
             <h3>New to our community ?</h3>
             <p>
               Discover a world of possibilities! Join us and explore a vibrant
-              community where ideas flourish and connections thrive.
+              community that values your unique contributions. Sign up now and
+              start your journey with us!
             </p>
-            <button className="abv-btn transparent" onClick={handleSignUpClick}>
+            <button
+              className="signup-btn transparent"
+              id="sign-up-btn"
+              onClick={handleSignUpClick}
+            >
               Sign up
-            </button>
-          </div>
-          <img
-            src="https://i.ibb.co/6HXL6q1/Privacy-policy-rafiki.png"
-            className="image"
-            alt=""
-          />
-        </div>
-        <div className="panel right-panel">
-          <div className="content">
-            <h3>One of Our Valued Members</h3>
-            <p>
-              Thank you for being part of our community. Your presence enriches
-              our shared experiences. Let's continue this journey together!
-            </p>
-            <button className="abv-btn transparent" onClick={handleSignInClick}>
-              Login
             </button>
           </div>
           <img
             src="https://i.ibb.co/nP8H853/Mobile-login-rafiki.png"
             className="image"
-            alt=""
+            alt="log"
+          />
+        </div>
+        <div className="panel right-panel">
+          <div className="content">
+            <h3>One of us ?</h3>
+            <p>
+              Welcome back! Login to access your account and continue where you
+              left off. We are excited to see you again!
+            </p>
+            <button
+              className="signup-btn transparent"
+              id="sign-in-btn"
+              onClick={handleSignInClick}
+            >
+              Sign in
+            </button>
+          </div>
+          <img
+            src="https://i.ibb.co/6HXL6q1/Privacy-policy-rafiki.png"
+            className="image"
+            alt="register"
           />
         </div>
       </div>
+
+      {!showUsername ? (
+        <div className="popup">
+          <div className="popup-inner">
+            <h2>Enter a Username</h2>
+            <input
+              type="text"
+              value={username}
+              onChange={handleChange}
+              placeholder="Username"
+            />
+            <button onClick={handleUsername} disabled={done}>
+              {done ? "Creating..." : "Create"}
+            </button>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };
-
+  
 export default SignUpForm;
