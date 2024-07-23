@@ -1,27 +1,41 @@
 import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Hamburger from "../../../assets/menu.png";
 import "./Dashboard.css";
-import { Link } from "react-router-dom";
 import User from "../../../assets/user.png";
 
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const navigate = useNavigate();
 
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);
   };
 
+  const handleLogout = () => {
+    sessionStorage.clear();
+    navigate("/");
+  };
+
   useEffect(() => {
-    if (sessionStorage.getItem("locationAdded") === "true") {
+    if (localStorage.getItem("locationAdded") === "true") {
       setShowPopup(true);
-      sessionStorage.removeItem("locationAdded");
+      localStorage.removeItem("locationAdded");
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 5000);
     }
   }, []);
 
   return (
     <>
       <div className="listing-page-cont">
+        {showPopup && (
+          <div className="suc-message">
+            <p>Location has been added successfully!</p>
+          </div>
+        )}
         <nav className="side-navbar">
           <div className="dash-head">
             <img className="user-image" src={User} alt="Users image" />
@@ -37,20 +51,11 @@ const Navbar = () => {
             <div className="dashboard">Profile</div>
           </Link>
           <div>
-            <button>Logout</button>
+            <button className="logout" onClick={handleLogout}>Logout</button>
           </div>
         </nav>
         <div className="card-cont"></div>
       </div>
-
-      {showPopup && (
-        <div className="popup">
-          <div className="popup-content">
-            <p>Location has been added successfully!</p>
-            <button onClick={() => setShowPopup(false)}>Close</button>
-          </div>
-        </div>
-      )}
     </>
   );
 };

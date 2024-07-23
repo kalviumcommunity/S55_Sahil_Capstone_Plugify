@@ -20,8 +20,8 @@ function AddForm() {
     axios
       .post("https://plugify.onrender.com/add", updatedFormData)
       .then(() => {
-        console.log("Location added")
-        sessionStorage.setItem("locationAdded", "true");
+        console.log("Location added");
+        localStorage.setItem("locationAdded", true);
         navigate("/dashboard");
       })
       .catch((error) => {
