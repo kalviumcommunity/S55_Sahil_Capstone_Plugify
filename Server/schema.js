@@ -5,7 +5,8 @@ const userSchema = mongoose.Schema({
     contact_no: Number,
     price_per_min: Number,
     google_maps_link: String,
-    charge_type: String
+    charge_type: String,
+    created_by: String
 });
 
 const userModel = mongoose.model("plugifycollections", userSchema);

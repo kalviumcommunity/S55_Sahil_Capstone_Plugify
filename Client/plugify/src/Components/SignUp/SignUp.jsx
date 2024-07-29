@@ -217,7 +217,7 @@ const SignUpForm = () => {
             )}
             <input type="submit" value="Login" className="signup-btn solid" />
             <p className="social-text">Or Login with social platforms</p>
-            <div>
+            <div className="google-h">
               <GoogleLogin
                 onSuccess={onSuccess}
                 onError={onFailure}
@@ -285,14 +285,14 @@ const SignUpForm = () => {
             )}
             <input type="submit" value="Sign up" className="signup-btn" />
             <p className="social-text">Or Sign up with Google</p>
-            <div>
+            <div className="google-h">
               <GoogleLogin
                 onSuccess={onSuccess}
                 onError={onFailure}
                 className="padding"
                 text="continue_with"
                 size="medium"
-                width="250"
+                width="200"
               />
             </div>
           </form>
