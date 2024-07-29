@@ -25,6 +25,7 @@ const updateSchema = Joi.object({
   price_per_min: Joi.number().required(),
   google_maps_link: Joi.string().required().uri(),
   charge_type: Joi.string().required(),
+  created_by: Joi.string().required()
 });
 
 // GET request to get connection status
