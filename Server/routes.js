@@ -25,6 +25,7 @@ const updateSchema = Joi.object({
   price_per_min: Joi.number().required(),
   google_maps_link: Joi.string().required().uri(),
   charge_type: Joi.string().required(),
+  pin_code: Joi.number().required(),
   created_by: Joi.string().required()
 });
 

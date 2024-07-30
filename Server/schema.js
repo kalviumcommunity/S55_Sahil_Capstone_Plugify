@@ -6,6 +6,7 @@ const userSchema = mongoose.Schema({
     price_per_min: Number,
     google_maps_link: String,
     charge_type: String,
+    pin_code: Number,
     created_by: String
 });
 
