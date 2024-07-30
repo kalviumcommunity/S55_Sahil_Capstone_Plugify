@@ -125,6 +125,52 @@ app.get("/hello", function (req, res) {
   res.send("Hello");
 });
 
+// PUT request to update user data by ID
+app.put(`/updateCard/:id`, async (req, res) => {
+  try {
+      const { error, value } = updateSchema.validate(req.body);
+      if (error) {
+          return res.status(400).send(error.details[0].message);
+      }
+      const _id = req.params.id;
+      const updatedUser = await userModel.findByIdAndUpdate(_id, value, { new: true });
+      res.json(updatedUser);
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Error');
+  }
+});
+
+// DELETE request to delete user data by ID
+app.delete(`/delete/:id`, async (req, res) => {
+  try {
+      const _id = req.params.id;
+      const deletedUser = await userModel.findByIdAndDelete(_id);
+      if (!deletedUser) {
+          return res.status(404).send('User not found');
+      }
+      res.json(deletedUser);
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Error');
+  }
+});
+
+// GET request to get user data by ID
+app.get(`/cards/:id`, async (req, res) => {
+  try {
+      const _id = req.params.id;
+      const user = await userModel.findById(_id);
+      if (!user) {
+          return res.status(404).send('User not found');
+      }
+      res.json(user);
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Error');
+  }
+});
+
 app.post('/auth',async(req,res)=>{
   try{
       const user = {

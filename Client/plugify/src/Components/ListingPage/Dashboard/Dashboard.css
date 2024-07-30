@@ -1,3 +1,4 @@
+/* Base styles */
 .listing-page-cont {
   display: flex;
   width: 100%;
@@ -7,14 +8,16 @@
 .side-navbar {
   width: 250px;
   height: 100vh;
-  /* background-color: #dcc293; */
   background-color: #424242;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
   row-gap: 60px;
-  box-shadow: 10px 300px 100px rgb(255, 255, 255);
+  position: fixed;
+  left: 0;
+  transition: left 0.3s ease-in-out;
+  z-index: 1000;
 }
 
 .card-cont {
@@ -38,27 +41,26 @@
 }
 
 .dashboard-text, .listdata-text{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    height: 10vh;
-    --b: 0.1em;
-    --c: #ffffff; 
-    font-weight: 700;
-    padding-block: var(--b);
-    background: linear-gradient(var(--c) 50%, #ededed 0) 0%
-        calc(100% - var(--_p, 0%)) / 100% 200%,
-      linear-gradient(var(--c) 0 0) 0% var(--_p, 0%) / var(--_p, 0%) var(--b)
-        no-repeat;
-    -webkit-background-clip: text, padding-box;
-    background-clip: text, padding-box;
-    transition: 0.3s var(--_s, 0s) linear,
-      background-size 0.3s calc(0.3s - var(--_s, 0s));
-    background-color: rgb(235, 176, 82);
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 10vh;
+  --b: 0.1em;
+  --c: #ffffff; 
+  font-weight: 700;
+  padding-block: var(--b);
+  background: linear-gradient(var(--c) 50%, #ededed 0) 0%
+    calc(100% - var(--_p, 0%)) / 100% 200%,
+    linear-gradient(var(--c) 0 0) 0% var(--_p, 0%) / var(--_p, 0%) var(--b)
+    no-repeat;
+  -webkit-background-clip: text, padding-box;
+  background-clip: text, padding-box;
+  transition: 0.3s var(--_s, 0s) linear,
+    background-size 0.3s calc(0.3s - var(--_s, 0s));
+  background-color: rgb(235, 176, 82);
+}
 
 .dashboard-text:hover, .listdata-text:hover {
   --_p: 100%;
@@ -67,11 +69,11 @@
   color: #000000;
 }
 
-.username{
+.username {
   color: white;
 }
 
-.dash-head{
+.dash-head {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -117,7 +119,7 @@
   box-sizing: border-box; 
 }
 
-.logout{
+.logout {
   background-color: red;
   padding: 10px 38px;
   border-radius: 50px;
@@ -133,8 +135,136 @@
   box-shadow: 0px 5px 10px rgb(41, 41, 41);
 }
 
-.logout:hover{
+.logout:hover {
   background-position: left;
   color: #000000;
   background-color: #ffffff;
+}
+
+.card {
+  background-color: rgb(254,254,246);
+  background-image: url("https://kalvium.community/images/launcher-hero-bg.svg");
+  object-fit: cover;
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+  width: 260px;
+  min-height: 400px;
+  padding-bottom: 15px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgb(47, 47, 47);
+}
+
+.card:hover {
+  box-shadow: 1px 1px 8px #474747;
+  background-color: rgb(255, 238, 207);
+  transform: translateY(-4px);
+}
+
+.card-image {
+  padding: 2vh;
+}
+
+.card-image img {
+  border-radius: 10px;
+  width: 100%;
+  height: 40vh;
+  object-fit: cover;
+}
+
+.card-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 12px;
+  text-align: start;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.height {
+  margin-top: -10px;
+  color: rgb(76, 76, 76);
+}
+
+.age h5 {
+  color: rgb(76, 76, 76);
+}
+
+h3 {
+  font-size: 1rem;
+  text-wrap: wrap;
+  padding-bottom: 1.9vh;
+}
+
+.container-cards {
+  width: 1000px;
+  padding-block: 90px;
+  padding-inline: 1.2vw;
+  overflow: hidden;
+  row-gap: 3vw;
+  column-gap: 3vw;
+  margin-left: 27vw;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Styles for hamburger menu */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+}
+
+.hamburger img {
+  width: 40px;
+  height: 40px;
+}
+
+/* Mobile styles */
+@media (max-width: 600px) {
+  .hamburger {
+    display: block;
+  }
+
+  .side-navbar {
+    left: -250px; /* Hide the navbar initially */
+  }
+
+  .side-navbar.active {
+    left: 0; 
+  }
+
+  .container-cards {
+
+    margin-top: 40px;
+    margin-left: 0;
+    padding-inline: 60px;
+  }
+
+  .card {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .card-image img {
+    width: 100%;
+    height: auto;
+  }
 }
