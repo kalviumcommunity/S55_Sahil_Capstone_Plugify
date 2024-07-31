@@ -4,8 +4,10 @@ import ParentComponent from './Components/ParentComponent/ParentComponent';
 import Dashboard from './Components/ListingPage/Dashboard/Dashboard'
 import AddForm from './Components/ListingPage/AddEntity/addForm'
 import Update from './Components/ListingPage/Dashboard/Update'
+import Display from './Components/UsersPage/Display'
 import { Routes, Route } from "react-router-dom";
 import Login from './Components/SignUp/SignUp';
+import UserLogin from './Components/UsersPage/SignUp/SignUp'
 
 export default function App() {
   return (
@@ -14,7 +16,9 @@ export default function App() {
           <Route path="/" element={<ParentComponent />} />
           <Route path="/contact" element={<Contact />}/>
           <Route path='/signup' element={<Login />} />
+          <Route path='/signupuser' element={<UserLogin />} />
           <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/display' element={<Display />} />
           <Route path='/addentity' element={<AddForm/>}/>
           <Route path="/update/:id" element={<Update/>}/>
       </Routes>

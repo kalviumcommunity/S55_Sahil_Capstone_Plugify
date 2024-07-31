@@ -108,7 +108,9 @@ const Navbar = () => {
         <div className="container-cards flex">
           {data.length === 0 ? (
             <div className="no-cards-message">
-              <p>No charging stations added. Please add by clicking on List Data.</p>
+              <p>
+                No charging stations added. Please add by clicking on List Data.
+              </p>
             </div>
           ) : (
             data.map((player) => (
@@ -120,9 +122,11 @@ const Navbar = () => {
                   <div className="details">
                     <div className="name">
                       <h3>Charge Type: {player.charge_type}</h3>
-                      <h4>Contact: {player.contact_no}</h4>
+                      <h4>Contact: +91 {player.contact_no}</h4>
                     </div>
                     <div className="age">
+                      <h3>Pincode: {player.pin_code}</h3>
+
                       <h5 className="height">
                         <a
                           href={player.google_maps_link}
