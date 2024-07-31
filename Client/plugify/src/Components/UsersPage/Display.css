@@ -1,0 +1,239 @@
+/* Base styles */
+.listing-page-cont {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    justify-content: center;
+  }
+
+  
+  .card-cont {
+    width: 90%;
+    height: 100vh;
+    background-color: #010000;
+  }
+
+  
+  
+  .card {
+    background-color: rgb(254,254,246);
+    background-image: url("https://kalvium.community/images/launcher-hero-bg.svg");
+    object-fit: cover;
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+    width: 260px;
+    min-height: 400px;
+    padding-bottom: 15px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgb(47, 47, 47);
+  }
+  
+  .card:hover {
+    box-shadow: 1px 1px 8px #474747;
+    background-color: rgb(255, 238, 207);
+    transform: translateY(-4px);
+  }
+  
+  .card-image {
+    padding: 2vh;
+  }
+  
+  .card-image img {
+    border-radius: 10px;
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
+  }
+  
+  .card-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 12px;
+    text-align: start;
+  }
+  
+  .details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+  }
+  
+  .height {
+    margin-top: -10px;
+    color: rgb(76, 76, 76);
+  }
+  
+  .age h5 {
+    color: rgb(76, 76, 76);
+  }
+  
+  h3 {
+    font-size: 1rem;
+    text-wrap: wrap;
+    padding-bottom: 1.9vh;
+  }
+  
+  .container-cardss {
+    width: auto;
+    padding-block: 90px;
+    padding-inline: 1.2vw;
+    overflow: hidden;
+    row-gap: 3vw;
+    column-gap: 3vw;
+  }
+  
+  .flexx {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    justify-self: center;
+  }
+  
+  .actions{
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+  }
+  
+  .name{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .delete{
+    margin-top: 10px;
+    background-color:  #A50044;
+    width: auto; 
+    padding: 6px 10px; 
+    color: white;
+    font-weight: bold;
+    font-size: 16px; 
+    letter-spacing: 1.3px;
+    border: none;
+    border-radius: 7px;
+    box-shadow: 1.2px 1.2px 5px rgb(136, 136, 136);
+  }
+  
+  .delete:hover{
+    cursor: pointer;
+    animation: 1s ease 0s normal none pulsate;
+  }
+  
+  .update{
+    margin-top: 10px;
+    background-color: #cfc20f;
+    width: auto; 
+    padding: 6px 10px; 
+    color: white;
+    font-weight: bold;
+    font-size: 16px; 
+    letter-spacing: 1.3px;
+    border: none;
+    border-radius: 7px;
+    box-shadow: 1.2px 1.2px 5px rgb(136, 136, 136);
+  }
+  
+  .update:hover{
+    cursor: pointer;
+    animation: 1s ease 0s normal none pulsate;
+  }
+  
+  .map-button{
+    margin-top: 10px;
+    background-color: #075e22;
+    width: auto; 
+    padding: 5px 5px; 
+    color: white;
+    font-weight: bold;
+    font-size: 13px; 
+    letter-spacing: 1.3px;
+    border: none;
+    border-radius: 7px;
+    box-shadow: 1.2px 1.2px 5px rgb(136, 136, 136);
+  }
+  
+  .no-cards-message{
+    margin-top: 34vh;
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .pincode-form{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .pincode{
+    color: white;
+    width: 200px;
+  }
+
+  .pincode-sec{
+    display: flex;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .pincode-input{
+    background-color: #171717;
+  }
+
+  .pincode-button{
+    margin-top: 10px;
+    background-color: #075e22;
+    width: 15%; 
+    padding: 5px 5px; 
+    color: white;
+    font-size: 13px; 
+    border: none;
+    border-radius: 7px;
+
+  }
+  
+  /* Mobile styles */
+  @media (max-width: 600px) {
+    .hamburger {
+      display: block;
+    }
+  
+    .side-navbar {
+      left: -250px; /* Hide the navbar initially */
+    }
+  
+    .side-navbar.active {
+      left: 0; 
+    }
+  
+    .container-cards {
+  
+      margin-top: 40px;
+      margin-left: 0;
+      padding-inline: 60px;
+    }
+  
+    .card {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  
+    .card-image img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  

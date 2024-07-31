@@ -49,10 +49,12 @@ const Navbar = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`https://plugify.onrender.com/delete/${id}`);
-      const response = await axios.get(
-        "https://plugify.onrender.com/data"
+      const response = await axios.get("https://plugify.onrender.com/data");
+      const username = sessionStorage.getItem("username");
+      const filteredData = response.data.filter(
+        (item) => item.created_by === username
       );
-      setPlayers(response.data);
+      setData(filteredData);
     } catch (error) {
       console.error("Error deleting data:", error);
     }
@@ -75,13 +77,25 @@ const Navbar = () => {
               <img className="user-image" src={User} alt="User" />
               <h2 className="username">{sessionStorage.getItem("username")}</h2>
             </div>
-            <Link to="/dashboard" className="dashboard-text" onClick={handleShowNavbar}>
+            <Link
+              to="/dashboard"
+              className="dashboard-text"
+              onClick={handleShowNavbar}
+            >
               <div className="dashboard">Dashboard</div>
             </Link>
-            <Link to="/addentity" className="listdata-text" onClick={handleShowNavbar}>
+            <Link
+              to="/addentity"
+              className="listdata-text"
+              onClick={handleShowNavbar}
+            >
               <div className="dashboard">List Data</div>
             </Link>
-            <Link to="/profile" className="listdata-text" onClick={handleShowNavbar}>
+            <Link
+              to="/profile"
+              className="listdata-text"
+              onClick={handleShowNavbar}
+            >
               <div className="dashboard">Profile</div>
             </Link>
             <div>
@@ -92,43 +106,63 @@ const Navbar = () => {
           </nav>
         </div>
         <div className="container-cards flex">
-          {data.map((player) => (
-            <div className="card" key={player._id}>
-              <div className="card-image">
-                <img src={player.img_url} alt={player.name} />
-              </div>
-              <div className="card-text">
-                <div className="details">
-                  <div className="name">
-                    <h3>{player.charge_type}</h3>
-                    <h5 className="height">{player.google_maps_link}</h5>
-                  </div>
-                  <div className="age">
-                    <h4>{player.contact_no}</h4>
-                  </div>
-                </div>
-                <br />
-                <div>
-                  <h3>Price: {player.price_per_min} Rs/min</h3>
-                </div>
-                <div className="actions">
-                  <div>
-                    <Link to={`/update/${player._id}`}>
-                      <button className="update">Update</button>
-                    </Link>
-                  </div>
-                  <div>
-                    <button
-                      className="delete"
-                      onClick={() => handleDelete(player._id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              </div>
+          {data.length === 0 ? (
+            <div className="no-cards-message">
+              <p>
+                No charging stations added. Please add by clicking on List Data.
+              </p>
             </div>
-          ))}
+          ) : (
+            data.map((player) => (
+              <div className="card" key={player._id}>
+                <div className="card-image">
+                  <img src={player.img_url} alt={player.name} />
+                </div>
+                <div className="card-text">
+                  <div className="details">
+                    <div className="name">
+                      <h3>Charge Type: {player.charge_type}</h3>
+                      <h4>Contact: +91 {player.contact_no}</h4>
+                    </div>
+                    <div className="age">
+                      <h3>Pincode: {player.pin_code}</h3>
+
+                      <h5 className="height">
+                        <a
+                          href={player.google_maps_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <button className="map-button">
+                            Open in Google Maps
+                          </button>
+                        </a>
+                      </h5>
+                    </div>
+                  </div>
+                  <br />
+                  <div>
+                    <h3>Price: {player.price_per_min} Rs/min</h3>
+                  </div>
+                  <div className="actions">
+                    <div>
+                      <Link to={`/update/${player._id}`}>
+                        <button className="update">Update</button>
+                      </Link>
+                    </div>
+                    <div>
+                      <button
+                        className="delete"
+                        onClick={() => handleDelete(player._id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </>

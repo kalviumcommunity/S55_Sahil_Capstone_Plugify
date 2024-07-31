@@ -1,16 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import "./addForm.css";
+import { useNavigate, useParams } from "react-router-dom";
+import "../../ListingPage/AddEntity/addForm.css";
 
-function AddForm() {
+function UpdateForm() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  useEffect(() => {
+    // Fetch the existing data for the specific item by ID
+    axios
+      .get(`https://plugify.onrender.com/cards/${id}`)
+      .then((res) => {
+        const playerData = res.data;
+        // Set the fetched data to the form fields
+        setValue("img_url", playerData.img_url);
+        setValue("contact_no", playerData.contact_no);
+        setValue("price_per_min", playerData.price_per_min);
+        setValue("google_maps_link", playerData.google_maps_link);
+        setValue("charge_type", playerData.charge_type);
+      })
+      .catch((error) => console.error(error));
+  }, [id, setValue]);
 
   const onSubmit = async (formData) => {
     const updatedFormData = {
@@ -19,10 +37,10 @@ function AddForm() {
     };
 
     axios
-      .post("https://plugify.onrender.com/add", updatedFormData)
+      .put(`https://plugify.onrender.com/updateCard/${id}`, updatedFormData)
       .then(() => {
-        console.log("Location added");
-        localStorage.setItem("locationAdded", true);
+        console.log("Location updated");
+        localStorage.setItem("locationUpdated", true);
         navigate("/dashboard");
       })
       .catch((error) => {
@@ -109,4 +127,4 @@ function AddForm() {
   );
 }
 
-export default AddForm;
+export default UpdateForm;

@@ -186,8 +186,10 @@
 
 .details {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
+  align-items: center;
 }
 
 .height {
@@ -220,6 +222,77 @@ h3 {
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.actions{
+  display: flex;
+  flex-direction: row;
+  gap: 1vw;
+}
+
+.name{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.delete{
+  margin-top: 10px;
+  background-color:  #A50044;
+  width: auto; 
+  padding: 6px 10px; 
+  color: white;
+  font-weight: bold;
+  font-size: 16px; 
+  letter-spacing: 1.3px;
+  border: none;
+  border-radius: 7px;
+  box-shadow: 1.2px 1.2px 5px rgb(136, 136, 136);
+}
+
+.delete:hover{
+  cursor: pointer;
+  animation: 1s ease 0s normal none pulsate;
+}
+
+.update{
+  margin-top: 10px;
+  background-color: #cfc20f;
+  width: auto; 
+  padding: 6px 10px; 
+  color: white;
+  font-weight: bold;
+  font-size: 16px; 
+  letter-spacing: 1.3px;
+  border: none;
+  border-radius: 7px;
+  box-shadow: 1.2px 1.2px 5px rgb(136, 136, 136);
+}
+
+.update:hover{
+  cursor: pointer;
+  animation: 1s ease 0s normal none pulsate;
+}
+
+.map-button{
+  margin-top: 10px;
+  background-color: #075e22;
+  width: auto; 
+  padding: 5px 5px; 
+  color: white;
+  font-weight: bold;
+  font-size: 13px; 
+  letter-spacing: 1.3px;
+  border: none;
+  border-radius: 7px;
+  box-shadow: 1.2px 1.2px 5px rgb(136, 136, 136);
+}
+
+.no-cards-message{
+  margin-top: 34vh;
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
 }
 
 /* Styles for hamburger menu */

@@ -53,7 +53,7 @@ function NearbyStations() {
             </div>
           </div>
           <div className="nearby-btn-cont">
-            <Link to="/signup" className="nearby-btn">
+            <Link to="/signupuser" className="nearby-btn">
               See the nearest station
             </Link>
           </div>
